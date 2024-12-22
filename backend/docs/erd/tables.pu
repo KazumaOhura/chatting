@@ -1,0 +1,56 @@
+@startuml tables
+
+skinparam DefaultFontName '0xProto'
+
+/'
+図の中で目立たせたいエンティティに着色するための
+色の名前（定数）を定義します。
+'/
+!define MAIN_ENTITY #E2EFDA-C6E0B4
+!define MAIN_ENTITY_2 #FCE4D6-F8CBAD
+
+/' 他の色も、用途が分りやすいように名前をつけます。 '/
+!define METAL #F2F2F2-D9D9D9
+!define MASTER_MARK_COLOR AAFFAA
+!define TRANSACTION_MARK_COLOR FFAA00
+
+/'
+デフォルトのスタイルを設定します。
+この場合の指定は class です。entity ではエラーになります。
+'/
+skinparam class {
+  BackgroundColor METAL
+  BorderColor Black
+  ArrowColor Black
+}
+
+package "システム" as system {
+  entity users {
+    int user_id
+    string username
+    string email
+    string password
+    date created_at
+    date updated_at
+  }
+
+  entity rooms {
+    int room_id
+    string name
+    date created_at
+    date updated_at
+  }
+
+  entity messages {
+    int message_id
+    int room_id
+    int user_id
+    string content
+    date created_at
+  }
+}
+
+users ||--|{ messages : sent by
+rooms ||--|{ messages : in room
+
+@enduml

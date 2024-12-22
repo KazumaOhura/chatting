@@ -1,0 +1,72 @@
+services:
+  app:
+    container_name: app
+    build:
+      context: ./backend
+      dockerfile: ./build/package/Dockerfile
+    tty: true
+    init: true
+    expose:
+      - '8080'
+    volumes:
+      - ./backend:/go/src/boons-drone.com/chatting
+    depends_on:
+      - database
+    env_file:
+      - ./backend/build/.go_env
+    environment:
+      - TZ=Asia/Tokyo
+    command: ["air", "-c", ".air.toml"]
+    
+  web:
+    container_name: web
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    working_dir: /app
+    tty: true
+    init: true
+    expose:
+      - '3000'
+    ports: # For debug
+      - '5173:5173'
+    volumes:
+      - ./frontend:/app
+    # command: ["node", "--run", "start"]
+    command: ["node", "--run", "dev"]
+
+  proxy:
+    container_name: proxy
+    image: nginx
+    tty: true
+    init: true
+    depends_on:
+      - app
+      - web
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/conf/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/log:/var/log/nginx
+
+  database:
+    container_name: database
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - TZ=Asia/Tokyo
+    expose:
+      - '5432'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./database/init:/docker-entrypoint-initdb.d
+      - ./database/conf/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./database/conf/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+      - database-store:/var/lib/postgresql/data
+    command: -c 'config_file=/etc/postgresql/postgresql.conf'
+
+volumes:
+  database-store:

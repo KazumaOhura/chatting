@@ -1,0 +1,95 @@
+@startuml usecase
+
+class GetUsersRequest {
+  + Name: string
+}
+
+class GetUsersResponse {
+  + Users: []Users
+}
+
+class GetUserRequest {
+  + ID: int
+}
+
+class GetUserResponse {
+  + User: *User
+}
+
+class CreateUserRequest {
+  + Name: string
+}
+
+class CreateUserResponse {
+  + User: *User
+}
+
+class UpdateUserRequest {
+  + Name: string
+}
+
+class UpdateUserResponse {
+  + User: *User
+}
+
+class DeleteUserRequest {
+  + ID: int
+}
+
+class DeleteUserResponse {
+  + Count: int
+}
+
+interface GetUserUseCase {
+  + Execute(req GetUserRequest)
+}
+
+class GetUserInteractor implements GetUserUseCase {
+  + Execute(req GetUserRequest)
+}
+
+interface GetUsersUseCase {
+  + Execute(req GetUserRequest)
+}
+
+class GetUsersInteractor implements GetUsersUseCase {
+  + Execute(req GetUserRequest)
+}
+
+interface CreateUserUseCase {
+  + Execute(req CreateUserRequest)
+}
+
+class CreateUserInteractor implements CreateUserUseCase {
+  + Execute(req CreateUserRequest)
+}
+
+interface UpdateUserUseCase {
+  + Execute(req UpdateUserRequest)
+}
+
+class UpdateUserInteractor implements UpdateUserUseCase {
+  + Execute(req UpdateUserRequest)
+}
+
+interface DeleteUserUseCase {
+  + Execute(req DeleteUserRequest)
+}
+
+class DeleteUserInteractor implements DeleteUserUseCase {
+  + Execute(req DeleteUserRequest)
+}
+
+GetUserRequest -- GetUserUseCase
+GetUsersRequest -- GetUsersUseCase
+CreateUserRequest -- CreateUserUseCase
+UpdateUserRequest -- UpdateUserUseCase
+DeleteUserRequest -- DeleteUserUseCase
+
+GetUserResponse -- GetUserUseCase
+GetUsersResponse -- GetUsersUseCase
+CreateUserResponse -- CreateUserUseCase
+UpdateUserResponse -- UpdateUserUseCase
+DeleteUserResponse -- DeleteUserUseCase
+
+@enduml

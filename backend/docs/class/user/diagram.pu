@@ -1,0 +1,25 @@
+@startuml user
+skin rose
+
+skinparam DefaultFontName '0xProto'
+skinparam DefaultFontSize 14
+
+!include handler.pu
+!include infrastructure.pu
+!include model.pu
+!include repository.pu
+!include usecase.pu
+
+GetUserHandler ---> GetUserUseCase
+GetUsersHandler ---> GetUsersUseCase
+CreateUserHandler ---> CreateUserUseCase
+UpdateUserHandler ---> UpdateUserUseCase
+DeleteUserHandler ---> DeleteUserUseCase
+
+GetUserInteractor ---o UserRepository
+GetUsersInteractor ---o UserRepository
+CreateUserInteractor ---o UserRepository
+UpdateUserInteractor ---o UserRepository
+DeleteUserInteractor ---o UserRepository
+
+@enduml

@@ -1,0 +1,9 @@
+@startuml erd
+
+skinparam DefaultFontName '0xProto'
+
+!include tables.pu
+
+users ||-d-o{ rooms
+
+@enduml

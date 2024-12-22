@@ -1,0 +1,10 @@
+@startuml infrastructure
+
+interface ExternalService {
+
+}
+
+
+note right of ExternalService : 外部のサービス
+
+@enduml

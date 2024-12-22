@@ -1,0 +1,9 @@
+@startuml model
+
+class User {
+  + ID: int
+  + Name: string
+  + ValidateName(): bool
+}
+
+@enduml

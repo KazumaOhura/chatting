@@ -1,0 +1,25 @@
+services:
+  api-server:
+    container_name: api-server
+    build:
+      context: ./backend
+      dockerfile: ./build/package/Dockerfile
+    volumes:
+      - ./backend:/go/src/boons-drone.com/chatting
+    tty: true
+    env_file:
+      - ./build/.go_env
+    environment:
+      - TZ=Asia/Tokyo
+    
+  web:
+    container_name: web
+    image: nginx:1.27.2
+
+  database:
+    image: postgres:17.0
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - TZ=Asia/Tokyo

@@ -1,0 +1,37 @@
+@startuml repository
+
+interface UserRepository {
+  +GetById(id int) (*User, error)
+  +GetAll() ([]User, error)
+  +FindBy(criteria UserCriteria) ([]User, error)
+  +Add(user *User) (*User, error)
+  +Update(user *User) (*User, error)
+  +Delete(user *User) (int, error)
+}
+
+class BoilUserRepository implements UserRepository {
+  - db *DB
+  +GetById(id int) (*User, error)
+  +GetAll() ([]User, error)
+  +FindBy(criteria UserCriteria) ([]User, error)
+  +Add(user *User) (*User, error)
+  +Update(user *User) (*User, error)
+  +Delete(user *User) (int, error)
+}
+
+class UserCriteria {
+
+}
+
+interface DB {
+
+}
+
+UserRepository -r- UserCriteria
+BoilUserRepository -r-o DB
+
+note right of DB : ORMが詳細を実装
+note left of BoilUserRepository : UserRepositoryをORMで実装する
+note right of UserCriteria : ユーザ検索条件
+
+@enduml

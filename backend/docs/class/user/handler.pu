@@ -1,0 +1,27 @@
+@startuml handler
+
+interface Handler {
+  + handle(ctx *gin.Context)
+}
+
+class GetUserHandler implements Handler {
+  + handle(ctx *gin.Context)
+}
+
+class GetUsersHandler implements Handler {
+  + handle(ctx *gin.Context)
+}
+
+class CreateUserHandler implements Handler {
+  + handle(ctx *gin.Context)
+}
+
+class UpdateUserHandler implements Handler {
+  + handle(ctx *gin.Context)
+}
+
+class DeleteUserHandler implements Handler {
+  + handle(ctx *gin.Context)
+}
+
+@enduml

@@ -1,0 +1,69 @@
+backend/
+├── api
+├── build
+│   └── package
+│       └── Dockerfile
+├── cmd
+│   └── app
+│       ├── app.go
+│       └── tmp
+│           ├── build-errors.log
+│           └── main
+├── configs
+├── deployments
+│   └── docker-compose.yml
+├── docs
+│   └── umls
+│       ├── class
+│       │   └── user.pu
+│       ├── components
+│       └── erd
+│           ├── erd.puml
+│           └── tables.puml
+├── go.mod
+├── go.sum
+├── init
+├── internal
+│   ├── domain
+│   │   ├── model
+│   │   │   └── user.go
+│   │   ├── repository
+│   │   │   └── user_repository.go
+│   │   └── service
+│   ├── infrastructure
+│   │   ├── config
+│   │   │   ├── config.go
+│   │   │   └── fx.go
+│   │   ├── database
+│   │   ├── migrator
+│   │   │   ├── fx.go
+│   │   │   └── migrate.go
+│   │   └── store
+│   │       ├── fx.go
+│   │       └── store.go
+│   ├── interface
+│   │   ├── gateway
+│   │   └── http
+│   │       ├── handler
+│   │       │   ├── fx.go
+│   │       │   └── handler.go
+│   │       ├── middleware
+│   │       │   └── auth
+│   │       │       └── auth.go
+│   │       └── routes
+│   │           └── route.go
+│   ├── migrations
+│   │   ├── 20241127184649_create_users_table.down.sql
+│   │   └── 20241127184649_create_users_table.up.sql
+│   └── usecase
+│       ├── interactor
+│       └── user_usecase.go
+├── pkg
+├── scripts
+├── sqlboiler.toml
+├── test
+├── tmp
+│   └── main
+└── tools
+
+40 directories, 27 files
